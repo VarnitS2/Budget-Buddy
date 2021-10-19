@@ -36,6 +36,9 @@ When I got a job at UIUC, I always wanted to make a budget app that would specif
 - Week 2: Perform analysis, extend CLI, and start GUI
 - Week 3: Extend and finish GUI, data visualization
 
+## GUI Mockup
+![](GUI.jpg "GUI")
+
 ## Rubrics
 
 ### Week 1
