@@ -38,7 +38,7 @@ When I got a job at UIUC, I always wanted to make a budget app that would specif
 - Week 3: Create GUI views for data analysis flow, visualize data using third-party libraries, enforce proper page routing
 
 ## GUI Mockup
-<!-- ![](GUI.jpg "GUI") -->
+![](GUI.jpg "GUI")
 
 ## Rubrics
 
