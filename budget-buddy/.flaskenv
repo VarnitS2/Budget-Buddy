@@ -1,0 +1,2 @@
+FLASK_APP=budget_buddy.py
+FLASK_ENV=development
