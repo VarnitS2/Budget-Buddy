@@ -7,7 +7,6 @@ from api import app
 from api import db_worker
 
 _api_db = db_worker.Worker(':memory:')
-# _api_db = db_worker.Worker('api/data.db')
 
 @app.route('/api/init-db', methods=['GET'])
 def init_api_db() -> Response:
