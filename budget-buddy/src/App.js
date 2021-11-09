@@ -1,36 +1,25 @@
-import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import HomeView from "./Views/HomeView";
+import RegisterView from "./Views/RegisterView";
+import LoginView from "./Views/LoginView";
+import DashboardView from "./Views/DashboardView";
+import UserSettingsView from "./Views/UserSettingsView";
+import AddTransactionView from "./Views/AddTransactionView";
 
 function App() {
-  const [backendText, setBackendText] = useState("");
-
-  useEffect(() => {
-    fetch("/api")
-      .then((response) => response.json())
-      .then((data) => {
-        setBackendText(data.message);
-      });
-  }, []);
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <p>{backendText}</p>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/add-transaction" element={<AddTransactionView />} />
+        <Route path="/user-settings" element={<UserSettingsView />} />
+        <Route path="/dashboard" element={<DashboardView />} />
+        <Route path="/register" element={<RegisterView />} />
+        <Route path="/login" element={<LoginView />} />
+        <Route path="/" element={<HomeView />} />
+      </Routes>
+    </Router>
   );
 }
 
