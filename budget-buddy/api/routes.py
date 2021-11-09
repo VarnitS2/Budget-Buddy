@@ -2,11 +2,16 @@ import hashlib
 from flask import request
 from flask.json import jsonify
 from flask.wrappers import Response
+import os.path
 
 from api import app
 from api import db_worker
 
-_api_db = db_worker.Worker(':memory:')
+if not os.path.isfile('api/data.db'):
+    _api_db = db_worker.Worker('api/data.db')
+    _api_db.create_tables()
+else:
+    _api_db = db_worker.Worker('api/data.db')
 
 @app.route('/api/init-db', methods=['GET'])
 def init_api_db() -> Response:
@@ -57,7 +62,7 @@ def user_login() -> Response:
     else:
         return jsonify(status=400, message='Invalid password')
 
-@app.route('/api/user/get', methods=['POST'])
+@app.route('/api/user/get-info', methods=['POST'])
 def user_get_info() -> Response:
     user_email = request.get_json()['email']
 
@@ -71,6 +76,76 @@ def user_get_info() -> Response:
         'username': tuple(users[0])[3],
         'balance': tuple(users[0])[4]
     })
+
+@app.route('/api/user/get-transactions', methods=['POST'])
+def user_get_transactions() -> Response:
+    user_email = request.get_json()['email']
+
+    users = _api_db.select_from_users(user_email)
+    if len(users) != 1:
+        return jsonify(status=400, message='Invalid email')
+
+    transactions = _api_db.select_from_transactions(user_email)
+
+    return jsonify(status=200, data=[{
+        'transaction_id': tuple(transaction)[0],
+        'user_email': tuple(transaction)[1],
+        'date': tuple(transaction)[2],
+        'description': tuple(transaction)[3],
+        'type': tuple(transaction)[4],
+        'amount': tuple(transaction)[5],
+    } for transaction in transactions])
+
+@app.route('/api/user/get-balance-breakdown', methods=['POST'])
+def user_get_balance_breakdown() -> Response:
+    user_email = request.get_json()['email']
+
+    users = _api_db.select_from_users(user_email)
+    if len(users) != 1:
+        return jsonify(status=400, message='Invalid email')
+
+    transactions = _api_db.select_from_transactions(user_email)
+
+    balance = 0.0
+    income = 0.0
+    expenditure = 0.0
+
+    for transaction in transactions:
+        if tuple(transaction)[4] == '-':
+            balance -= tuple(transaction)[5]
+            expenditure += tuple(transaction)[5]
+        else:
+            balance += tuple(transaction)[5]
+            income += tuple(transaction)[5]
+
+    return jsonify(status=200, data={
+        'balance': balance,
+        'income': income,
+        'expenditure': expenditure
+    })
+
+@app.route('/api/user/add-transaction', methods=['POST'])
+def user_add_transaction() -> Response:
+    user_email = request.get_json()['email']
+    description = request.get_json()['description']
+    type = request.get_json()['type']
+    amount = request.get_json()['amount']
+
+    users = _api_db.select_from_users(user_email)
+    if len(users) != 1:
+        return jsonify(status=400, message='Invalid email')
+
+    try:
+        _api_db.add_to_transactions({
+            'user_email': user_email,
+            'description': description,
+            'type': type,
+            'amount': amount
+        })
+    except Exception as e:
+        return jsonify(status=400, message=e)
+    else:
+        return jsonify(status=200, message='Transaction added successfully')
 
 @app.route('/api/user/update-balance', methods=['POST'])
 def user_update_balance() -> Response:
