@@ -124,6 +124,21 @@ def user_get_balance_breakdown() -> Response:
         'expenditure': expenditure
     })
 
+@app.route('/api/user/top-spending-categories', methods=['POST'])
+def user_get_top_spending_categories() -> Response:
+    user_email = request.get_json()['email']
+
+    users = _api_db.select_from_users(user_email)
+    if len(users) != 1:
+        return jsonify(status=400, message='Invalid email')
+        
+    transactions = _api_db.select_from_transactions(user_email)
+
+    categories = [tuple(transaction)[3] for transaction in transactions]
+    uniqueCategories = list(set(categories))
+
+    return jsonify(status=200, data=uniqueCategories)
+
 @app.route('/api/user/add-transaction', methods=['POST'])
 def user_add_transaction() -> Response:
     user_email = request.get_json()['email']
