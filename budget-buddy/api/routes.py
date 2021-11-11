@@ -7,6 +7,9 @@ import os.path
 from api import app
 from api import db_worker
 
+# Uncomment to run test
+# _api_db = db_worker.Worker(':memory:')
+
 if not os.path.isfile('api/data.db'):
     _api_db = db_worker.Worker('api/data.db')
     _api_db.create_tables()
