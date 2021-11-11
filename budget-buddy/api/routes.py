@@ -16,17 +16,7 @@ if not os.path.isfile('api/data.db'):
 else:
     _api_db = db_worker.Worker('api/data.db')
 
-@app.route('/api/init-db', methods=['GET'])
-def init_api_db() -> Response:
-    try:
-        global _api_db
-        _api_db = db_worker.Worker('api/data.db')
-        _api_db.create_tables()
-    except Exception as e:
-        return jsonify(status=500, message=e)
-    else:
-        return jsonify(status=200, message='Database initialized successfully!')
-
+# Endpoint for new user registration
 @app.route('/api/register', methods=['POST'])
 def user_register() -> Response:
     user_email = request.get_json()['email']
@@ -50,6 +40,7 @@ def user_register() -> Response:
     else:
         return jsonify(status=200, message='User created successfully!')
 
+# Endpoint for user login
 @app.route('/api/login', methods=['POST'])
 def user_login() -> Response:
     user_email = request.get_json()['email']
@@ -65,6 +56,7 @@ def user_login() -> Response:
     else:
         return jsonify(status=400, message='Invalid password')
 
+# Endpoint to get the user with the provided email
 @app.route('/api/user/get-info', methods=['POST'])
 def user_get_info() -> Response:
     user_email = request.get_json()['email']
@@ -80,6 +72,7 @@ def user_get_info() -> Response:
         'balance': tuple(users[0])[4]
     })
 
+# Endpoint to get user transactions
 @app.route('/api/user/get-transactions', methods=['POST'])
 def user_get_transactions() -> Response:
     user_email = request.get_json()['email']
@@ -99,6 +92,7 @@ def user_get_transactions() -> Response:
         'amount': tuple(transaction)[5],
     } for transaction in transactions])
 
+# Data analysis endpoint to get balance, income, and expenditure numbers
 @app.route('/api/user/get-balance-breakdown', methods=['POST'])
 def user_get_balance_breakdown() -> Response:
     user_email = request.get_json()['email']
@@ -127,6 +121,7 @@ def user_get_balance_breakdown() -> Response:
         'expenditure': expenditure
     })
 
+# Endpoint to get user's top spending categories
 @app.route('/api/user/top-spending-categories', methods=['POST'])
 def user_get_top_spending_categories() -> Response:
     user_email = request.get_json()['email']
@@ -142,6 +137,7 @@ def user_get_top_spending_categories() -> Response:
 
     return jsonify(status=200, data=uniqueCategories)
 
+# Endpoint to add a transaction for a user
 @app.route('/api/user/add-transaction', methods=['POST'])
 def user_add_transaction() -> Response:
     user_email = request.get_json()['email']
@@ -165,6 +161,7 @@ def user_add_transaction() -> Response:
     else:
         return jsonify(status=200, message='Transaction added successfully')
 
+# Endpoint to update provided user's balance
 @app.route('/api/user/update-balance', methods=['POST'])
 def user_update_balance() -> Response:
     user_email = request.get_json()['email']
@@ -181,6 +178,7 @@ def user_update_balance() -> Response:
     else:
         return jsonify(status=200, message='Balance updated successfully')
 
+# Endpoint to delete user account
 @app.route('/api/user/delete', methods=['POST'])
 def user_delete() -> Response:
     user_email = request.get_json()['email']
