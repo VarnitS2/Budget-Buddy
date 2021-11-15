@@ -1,16 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Typography, makeStyles } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-
-const useStyles = makeStyles({
-  root: {
-    fontFamily: "BlinkMacSystemFont",
-  },
-  displayCenter: {
-    display: "flex",
-    justifyContent: "center",
-  },
-});
+import useStyles from "../style";
 
 function AddTransactionView() {
   const classes = useStyles();

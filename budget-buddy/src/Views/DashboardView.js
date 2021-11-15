@@ -1,24 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Button, Typography, makeStyles } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-
-const useStyles = makeStyles({
-  root: {
-    fontFamily: "BlinkMacSystemFont",
-  },
-  displayCenter: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  dashboard: {
-    marginTop: "20px",
-    fontSize: "60px",
-  },
-  buttons: {
-    borderRadius: "100px",
-    marginLeft: "10px",
-  },
-});
+import useStyles from "../style";
 
 function DashboardView() {
   const classes = useStyles();
@@ -72,12 +55,12 @@ function DashboardView() {
   return (
     <div className={classes.root}>
       <div className={classes.displayCenter}>
-        <Typography className={classes.dashboard}>Dashboard</Typography>
+        <Typography className={classes.dashboardView_title}>Dashboard</Typography>
       </div>
 
       <div className={classes.displayCenter}>
         <Button
-          className={classes.buttons}
+          className={classes.dashboardView_buttons}
           variant="outlined"
           onClick={handleAddTransactionButtonPressed}
         >
@@ -85,7 +68,7 @@ function DashboardView() {
         </Button>
 
         <Button
-          className={classes.buttons}
+          className={classes.dashboardView_buttons}
           variant="outlined"
           onClick={handleUserSettingsButtonPressed}
         >
@@ -93,7 +76,7 @@ function DashboardView() {
         </Button>
 
         <Button
-          className={classes.buttons}
+          className={classes.dashboardView_buttons}
           variant="outlined"
           onClick={handleSignOutButtonPressed}
         >

@@ -3,59 +3,11 @@ import {
   Button,
   Typography,
   Collapse,
-  makeStyles,
   TextField,
 } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
-
-const useStyles = makeStyles({
-  root: {
-    fontFamily: "BlinkMacSystemFont",
-  },
-  displayColumn: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  displayCenter: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  alertContainer: {
-    position: "absolute",
-    marginTop: "480px",
-  },
-  backButton: {
-    position: "absolute",
-    width: "150px",
-    height: "50px",
-    marginTop: "30px",
-    marginLeft: "30px",
-    borderRadius: "100px",
-  },
-  settings: {
-    marginTop: "20px",
-    fontSize: "60px",
-  },
-  currentUserText: {
-    marginTop: "200px",
-    fontSize: "30px",
-  },
-  deleteAccountButton: {
-    width: "200px",
-    height: "50px",
-    marginTop: "700px",
-    borderRadius: "100px",
-    color: "red",
-  },
-  passwordContainer: {
-    position: "absolute",
-    marginTop: "560px",
-  },
-  passwordText: {
-    marginTop: "20px",
-  },
-});
+import useStyles from "../style";
 
 function UserSettingsView() {
   const classes = useStyles();
@@ -113,24 +65,24 @@ function UserSettingsView() {
   return (
     <div className={classes.root}>
       <Button
-        className={classes.backButton}
+        className={classes.userSettingsView_backButton}
         variant="outlined"
         onClick={handleBackButtonPressed}
       >
         Back
       </Button>
       <div className={classes.displayCenter}>
-        <Typography className={classes.settings}>Settings</Typography>
+        <Typography className={classes.userSettingsView_settings}>Settings</Typography>
       </div>
 
       <div className={classes.displayCenter}>
-        <Typography className={classes.currentUserText}>
+        <Typography className={classes.userSettingsView_currentUserText}>
           Currently logged in as: {currentUser}
         </Typography>
       </div>
 
       <div className={classes.displayCenter}>
-        <Collapse className={classes.alertContainer} in={errorFlag}>
+        <Collapse className={classes.userSettingsView_alertContainer} in={errorFlag}>
           <Alert
             severity="error"
             onClose={() => {
@@ -144,10 +96,10 @@ function UserSettingsView() {
       </div>
 
       <div className={classes.displayCenter}>
-        <Collapse className={classes.passwordContainer} in={deleteAccountFlag}>
+        <Collapse className={classes.userSettingsView_passwordContainer} in={deleteAccountFlag}>
           <Typography>Type in your password:</Typography>
           <TextField
-            className={classes.passwordText}
+            className={classes.userSettingsView_passwordText}
             label="Password"
             type="password"
             variant="outlined"
@@ -158,7 +110,7 @@ function UserSettingsView() {
 
       <div className={classes.displayCenter}>
         <Button
-          className={classes.deleteAccountButton}
+          className={classes.userSettingsView_deleteAccountButton}
           variant="outlined"
           onClick={handleDeleteAccountButtonPressed}
         >

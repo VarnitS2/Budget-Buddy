@@ -5,64 +5,10 @@ import {
   TextField,
   Link,
   Collapse,
-  makeStyles,
 } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
-
-const useStyles = makeStyles({
-  root: {
-    fontFamily: "BlinkMacSystemFont",
-  },
-  displayColumn: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  displayCenter: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  alertContainer: {
-    display: "flex",
-    justifyContent: "center",
-    position: "absolute",
-    marginTop: "150px",
-    marginLeft: "33px"
-  },
-  signUpText: {
-    display: "flex",
-    justifyContent: "center",
-    fontSize: "40px",
-    marginTop: "300px",
-  },
-  textFieldItemOne: {
-    width: "350px",
-    marginTop: "50px",
-  },
-  textFieldItemTwo: {
-    width: "350px",
-    marginTop: "10px",
-  },
-  signUpButton: {
-    width: "150px",
-    height: "50px",
-    marginTop: "20px",
-    borderRadius: "100px",
-  },
-  bottomText: {
-    display: "flex",
-    justifyContent: "center",
-    fontSize: "20px",
-    color: "gray",
-    marginTop: "260px",
-  },
-  linkContainer: {
-    marginTop: "262px",
-    marginLeft: "6px",
-    fontSize: "20px",
-    color: "gray",
-  },
-});
+import useStyles from "../style";
 
 function RegisterView() {
   const classes = useStyles();
@@ -134,7 +80,7 @@ function RegisterView() {
     <div className={classes.root}>
       <div className={classes.displayCenter}>
         <div className={classes.displayColumn}>
-          <Collapse className={classes.alertContainer} in={errorFlag}>
+          <Collapse className={classes.registerView_alertContainer} in={errorFlag}>
             <Alert
               severity="error"
               onClose={() => {
@@ -146,7 +92,7 @@ function RegisterView() {
             </Alert>
           </Collapse>
 
-          <Typography className={classes.signUpText}>
+          <Typography className={classes.registerView_signUpText}>
             Create a new account
           </Typography>
 
@@ -187,7 +133,7 @@ function RegisterView() {
 
           <div className={classes.displayCenter}>
             <Button
-              className={classes.signUpButton}
+              className={classes.registerView_signUpButton}
               variant="outlined"
               onClick={handleSignUpButtonPressed}
             >
@@ -196,12 +142,12 @@ function RegisterView() {
           </div>
 
           <div className={classes.displayCenter}>
-            <Typography className={classes.bottomText}>
+            <Typography className={classes.registerView_bottomText}>
               Already have an account? Login
             </Typography>
 
             <Link
-              className={classes.linkContainer}
+              className={classes.registerView_linkContainer}
               href="/login"
               color="inherit"
               underline="none"

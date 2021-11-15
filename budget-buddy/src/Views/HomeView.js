@@ -1,39 +1,7 @@
 import React from "react";
-import { Button, Typography, makeStyles } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
-
-const useStyles = makeStyles({
-  root: {
-    fontFamily: "BlinkMacSystemFont",
-  },
-  headerColumn: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  budgetBuddyHeader: {
-    display: "flex",
-    justifyContent: "center",
-    marginTop: "300px",
-    fontSize: "80px",
-  },
-  budgetBuddyDesc: {
-    display: "flex",
-    justifyContent: "center",
-    marginTop: "50px",
-    fontSize: "40px",
-  },
-  topNavBar: {
-    display: "flex",
-    justifyContent: "flex-end",
-  },
-  signUpButton: {
-    width: "150px",
-    height: "50px",
-    marginTop: "30px",
-    marginRight: "30px",
-    borderRadius: "100px",
-  },
-});
+import useStyles from "../style";
 
 function HomeView() {
   const classes = useStyles();
@@ -45,9 +13,9 @@ function HomeView() {
 
   return (
     <div className={classes.root}>
-      <div className={classes.topNavBar}>
+      <div className={classes.homeView_topNavBar}>
         <Button
-          className={classes.signUpButton}
+          className={classes.homeView_signUpButton}
           variant="outlined"
           onClick={handleSignUpButtonPressed}
         >
@@ -55,12 +23,12 @@ function HomeView() {
         </Button>
       </div>
 
-      <div className={classes.headerColumn}>
-        <Typography className={classes.budgetBuddyHeader}>
+      <div className={classes.homeView_headerColumn}>
+        <Typography className={classes.homeView_budgetBuddyHeader}>
           Budget Buddy
         </Typography>
 
-        <Typography className={classes.budgetBuddyDesc}>
+        <Typography className={classes.homeView_budgetBuddyDesc}>
           Your companion on a journey towards smarter spending and budgeting
         </Typography>
       </div>

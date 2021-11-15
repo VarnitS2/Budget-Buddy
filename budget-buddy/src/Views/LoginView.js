@@ -5,64 +5,10 @@ import {
   TextField,
   Link,
   Collapse,
-  makeStyles,
 } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
-
-const useStyles = makeStyles({
-  root: {
-    fontFamily: "BlinkMacSystemFont",
-  },
-  displayColumn: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  displayCenter: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  alertContainer: {
-    display: "flex",
-    justifyContent: "center",
-    position: "absolute",
-    marginTop: "150px",
-    marginLeft: "80px"
-  },
-  loginText: {
-    display: "flex",
-    justifyContent: "center",
-    fontSize: "40px",
-    marginTop: "300px",
-  },
-  textFieldItemOne: {
-    width: "350px",
-    marginTop: "50px",
-  },
-  textFieldItemTwo: {
-    width: "350px",
-    marginTop: "10px",
-  },
-  loginButton: {
-    width: "150px",
-    height: "50px",
-    marginTop: "20px",
-    borderRadius: "100px",
-  },
-  bottomText: {
-    display: "flex",
-    justifyContent: "center",
-    fontSize: "20px",
-    color: "gray",
-    marginTop: "388px",
-  },
-  linkContainer: {
-    marginTop: "390.7px",
-    marginLeft: "6px",
-    fontSize: "20px",
-    color: "gray",
-  },
-});
+import useStyles from "../style";
 
 function LoginView() {
   const classes = useStyles();
@@ -115,7 +61,7 @@ function LoginView() {
     <div className={classes.root}>
       <div className={classes.displayCenter}>
         <div className={classes.displayColumn}>
-          <Collapse className={classes.alertContainer} in={errorFlag}>
+          <Collapse className={classes.loginView_alertContainer} in={errorFlag}>
             <Alert
               severity="error"
               onClose={() => {
@@ -127,7 +73,7 @@ function LoginView() {
             </Alert>
           </Collapse>
 
-          <Typography className={classes.loginText}>
+          <Typography className={classes.loginView_loginText}>
             Login to your account
           </Typography>
 
@@ -151,7 +97,7 @@ function LoginView() {
 
           <div className={classes.displayCenter}>
             <Button
-              className={classes.loginButton}
+              className={classes.loginView_loginButton}
               variant="outlined"
               onClick={handleLoginButtonPressed}
             >
@@ -160,12 +106,12 @@ function LoginView() {
           </div>
 
           <div className={classes.displayCenter}>
-            <Typography className={classes.bottomText}>
+            <Typography className={classes.loginView_bottomText}>
               Don't have an account? Sign up
             </Typography>
 
             <Link
-              className={classes.linkContainer}
+              className={classes.loginView_linkContainer}
               href="/register"
               color="inherit"
               underline="none"
