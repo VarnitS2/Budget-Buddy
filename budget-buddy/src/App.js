@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import HomeView from "./Views/HomeView";
-import RegisterView from "./Views/RegisterView";
-import LoginView from "./Views/LoginView";
-import DashboardView from "./Views/DashboardView";
-import UserSettingsView from "./Views/UserSettingsView";
-import AddTransactionView from "./Views/AddTransactionView";
+import HomeView from "./views/HomeView";
+import RegisterView from "./views/RegisterView";
+import LoginView from "./views/LoginView";
+import DashboardView from "./views/DashboardView";
+import UserSettingsView from "./views/UserSettingsView";
+import AddTransactionView from "./views/AddTransactionView";
 
 function App() {
   return (
