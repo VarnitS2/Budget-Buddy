@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { VictoryPie, VictoryAnimation, VictoryLabel } from "victory";
 
 function BalanceProgressBar(props) {
-  const [percent, setPercent] = useState(props.percent);
-  const [data, setData] = useState([]);
+  const [, setData] = useState([]);
 
+  // The setData method call refreshes the view that enables the VictoryLabel to update
   useEffect(() => {
-    setData(getData(percent));
-  }, [props]);
+    setData(getData(props.percent));
+  }, [props.percent]);
 
   const getData = (perc) => {
     return [
@@ -24,7 +24,7 @@ function BalanceProgressBar(props) {
           animate={{ duration: 1000 }}
           width={450}
           height={450}
-          data={getData(percent)}
+          data={getData(props.percent)}
           innerRadius={150}
           cornerRadius={25}
           labels={() => null}

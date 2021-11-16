@@ -53,8 +53,6 @@ function DashboardView() {
     }
   }, []);
 
-  useEffect(() => {console.log(paycheckPercent)}, [paycheckPercent]);
-
   const handleAddTransactionButtonPressed = () => {
     navigate("/add-transaction");
   };
