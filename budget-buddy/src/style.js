@@ -3,7 +3,13 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles({
   // Global styles
   root: {
-    fontFamily: "BlinkMacSystemFont",
+    position: "absolute",
+    top: "0",
+    right: "0",
+    bottom: "0",
+    left: "0",
+    backgroundColor: "white",
+    color: "#161519",
   },
   displayColumn: {
     display: "flex",
@@ -20,6 +26,9 @@ const useStyles = makeStyles({
   textFieldItemTwo: {
     width: "350px",
     marginTop: "10px",
+  },
+  pad: {
+    padding: "10px",
   },
 
   // Home View styles
@@ -49,6 +58,8 @@ const useStyles = makeStyles({
     marginTop: "30px",
     marginRight: "30px",
     borderRadius: "100px",
+    color: "#161519",
+    borderColor: "#161519",
   },
 
   // Register View styles
@@ -120,13 +131,104 @@ const useStyles = makeStyles({
   },
 
   // Dashboard View styles
-  dashboardView_title: {
-    marginTop: "20px",
-    fontSize: "60px",
+  dashboardView_topNavBarContainer: {
+    padding: "10px",
   },
-  dashboardView_buttons: {
+  dashboardView_topNavBar: {
+    display: "flex",
+    justifyContent: "space-between",
+    height: "100px",
+    backgroundColor: "#344756",
+    borderRadius: "15px",
+  },
+  dashboardView_title: {
+    width: "99.5%",
+    textAlign: "center",
+    position: "absolute",
+    marginTop: "15px",
+    fontSize: "45px",
+    fontFamily: "verdana",
+  },
+  dashboardView_buttons__addTransaction: {
+    position: "relative",
+    marginTop: "30px",
+    marginLeft: "30px",
     borderRadius: "100px",
+    color: "#DBD8E3",
+    borderColor: "#DBD8E3",
+    zIndex: "1",
+  },
+  dashboardView_buttons__userSettings: {
+    marginTop: "30px",
+    marginRight: "20px",
+    borderRadius: "100px",
+    color: "#DBD8E3",
+    borderColor: "#DBD8E3",
+  },
+  dashboardView_buttons__signOut: {
+    marginTop: "30px",
+    marginRight: "30px",
+    borderRadius: "100px",
+    color: "#DBD8E3",
+    borderColor: "#DBD8E3",
+  },
+  dashboardView_midRowContainer: {
+    height: "600px",
+    display: "flex",
+    padding: "10px",
+  },
+  dashboardView_transactionsContainer: {
+    width: "70%",
+    marginTop: "-10px",
+    backgroundColor: "#344756",
+    borderRadius: "15px",
+  },
+  dashboardView_transactionsContainerInner: {
+    marginTop: "30px",
+    marginLeft: "5px",
+  },
+  dashboardView_dateRangeContainer: {
+    width: "30%",
+    marginTop: "-10px",
     marginLeft: "10px",
+    backgroundColor: "#344756",
+    borderRadius: "15px",
+  },
+  dashboardView_dateRangeTitle: {
+    fontSize: "22px",
+    fontFamily: "verdana",
+    marginTop: "20px",
+    marginLeft: "30px",
+  },
+  dashboardView_dateRangeInner: {
+    width: "340px",
+    height: "462px",
+    borderRadius: "10px",
+    marginTop: "20px",
+    marginLeft: "145px",
+    backgroundColor: "white",
+  },
+  dashboardView_dateRangeInnerInner: {
+    marginLeft: "10px",
+  },
+  dashboardView_dateRangeFetchButton: {
+    marginTop: "20px",
+    marginLeft: "270px",
+    borderRadius: "100px",
+    color: "#DBD8E3",
+    borderColor: "#DBD8E3",
+  },
+  dashboardView_bottomRowContainer: {
+    marginTop: "-10px",
+    height: "462px",
+    backgroundColor: "#344756",
+    borderRadius: "15px",
+    display: "flex",
+    justifyContent: "center",
+  },
+  dashboardView_lastPaycheckText: {
+    marginLeft: "100px",
+    fontSize: 35,
   },
 
   // User Settings View styles
