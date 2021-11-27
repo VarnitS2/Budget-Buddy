@@ -194,3 +194,61 @@ def user_delete() -> Response:
         return jsonify(status=200, message='User deleted successfully')
     else:
         return jsonify(status=400, message='Invalid password')
+
+# Endpoint to fetch balance between dates for line chart
+@app.route('/api/user/transaction/dates', methods=['POST'])
+def user_transaction_between_dates() -> Response:
+    user_email = request.get_json()['email']
+    start_date = request.get_json()['start_date'].split('T')[0]
+    end_date = request.get_json()['end_date'].split('T')[0]
+
+    if len(_api_db.select_from_users(user_email)) != 1:
+        return jsonify(status=400, message='Invalid email')
+
+    transactions = _api_db.select_from_transactions_between_dates(user_email, start_date, end_date)
+    months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+    balance = 0.0
+    data = []
+    last_date = ""
+
+    for idx, transaction in enumerate(transactions):
+        cur_date = months[int(tuple(transaction)[2].split('-')[1])-1]+' '+str(tuple(transaction)[2].split('-')[2])
+        cur_balance = balance+tuple(transaction)[5] if tuple(transaction)[4] == '+' else balance-tuple(transaction)[5]
+
+        if cur_date == last_date:
+            del data[-1]
+
+        data.append({
+            'date': cur_date,
+            'balance': float('%.2f' % cur_balance)
+        })
+
+        last_date = cur_date
+        balance = cur_balance
+
+    return jsonify(status=200, message=data)
+
+# Endpoint to get percentage of most recent paycheck left
+@app.route('/api/user/paycheck/percent', methods=['POST'])
+def user_paycheck_percent() -> Response:
+    user_email = request.get_json()['email']
+
+    users = _api_db.select_from_users(user_email)
+    if len(users) != 1:
+        return jsonify(status=400, message='Invalid email')
+
+    transactions = _api_db.select_from_transactions(user_email)
+
+    expenses = 0
+    for transaction in reversed(transactions):
+        if tuple(transaction)[4] == '-':
+            expenses += tuple(transaction)[5]
+        else:
+            print(expenses)
+            print(tuple(transaction)[5])
+            percent = 100 - ((expenses / tuple(transaction)[5]) * 100)
+            print(percent)
+            break
+
+    return jsonify(status=200, message=float('%.2f' % percent))

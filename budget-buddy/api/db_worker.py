@@ -65,8 +65,8 @@ class Worker():
 
     # Add a record to the transactions table
     def add_to_transactions(self, transaction) -> None:
-        self._cur.execute('''INSERT INTO transactions (user_email, description, type, amount) VALUES
-                            (:user_email, :description, :type, :amount);''', transaction)
+        self._cur.execute('''INSERT INTO transactions (user_email, date, description, type, amount) VALUES
+                            (:user_email, :date, :description, :type, :amount);''', transaction)
         self._con.commit()
 
     # Select all transactions in the database
@@ -78,6 +78,12 @@ class Worker():
     def select_from_transactions(self, user_email) -> list:
         self._cur.execute('''SELECT * FROM transactions
                             WHERE user_email = ?;''', (user_email,))
+        return self._cur.fetchall()
+
+    # Select transaction between the provided dates with the provided user email from the database
+    def select_from_transactions_between_dates(self, user_email, start_date, end_date) -> list:
+        self._cur.execute('''SELECT * FROM transactions
+                            WHERE user_email = ? AND date >= ? AND date <= ?;''', (user_email, start_date, end_date))
         return self._cur.fetchall()
 
     # Delete the transaction with the provided transaction_id from the database
